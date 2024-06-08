@@ -186,4 +186,27 @@
 			transform: translateX(120px);
 		}
 	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 4rem;
+			margin: 0 1rem;
+		}
+		p {
+			font-size: 0.75rem;
+			margin: 2rem 1rem;
+		}
+	}
+	@media (max-width: 460px) {
+		h1 {
+			font-size: 3rem;
+			letter-spacing: 2px;
+			margin: 0px 1rem;
+		}
+		p {
+			font-size: 0.5rem;
+			letter-spacing: 2px;
+			margin: 2rem 1rem;
+		}
+	}
 </style>
