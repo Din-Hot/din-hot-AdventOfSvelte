@@ -23,43 +23,48 @@
 	}
 </script>
 
-{#each challenges as challenge (challenge.id)}
-	<button
-		class="accordion {currentOpen === challenge.id ? 'active' : ''} {currentOpen ===
-		challenge.id + 1
-			? 'next-active'
-			: ''}"
-		on:click={() => openAccordion(challenge.id)}
-		>Day {challenge.id} - {challenge.title}
-		{#if currentOpen === challenge.id}
-			<i class="fa-solid fa-angle-up"></i>
-		{:else}
-			<i class="fa-solid fa-angle-down"></i>
-		{/if}</button
-	>
-	{#if currentOpen === challenge.id}
-		<div
-			transition:slide={{ duration: 300 }}
-			class="panel {currentOpen === challenge.id ? 'active' : ''}"
+<ul>
+	{#each challenges as challenge (challenge.id)}
+		<li
+			class="accordion {currentOpen === challenge.id ? 'active' : ''} {currentOpen ===
+			challenge.id + 1
+				? 'next-active'
+				: ''}"
+			on:click={() => openAccordion(challenge.id)}
 		>
-			<p>
-				{challenge.content}
-			</p>
-
-			<a class="solution-button" href="/solutions/{challenge.id}">
-				<i class="fa-solid fa-pen-ruler"></i>My solution</a
+			Day {challenge.id} - {challenge.title}
+			{#if currentOpen === challenge.id}
+				<i class="fa-solid fa-angle-up"></i>
+			{:else}
+				<i class="fa-solid fa-angle-down"></i>
+			{/if}
+		</li>
+		{#if currentOpen === challenge.id}
+			<div
+				transition:slide={{ duration: 300 }}
+				class="panel {currentOpen === challenge.id ? 'active' : ''}"
 			>
-		</div>
-	{/if}
-{/each}
+				<p>
+					{challenge.content}
+				</p>
+
+				<a class="solution-button" href="/solutions/{challenge.id}">
+					<i class="fa-solid fa-pen-ruler"></i>My solution</a
+				>
+			</div>
+		{/if}
+	{/each}
+</ul>
 
 <style>
+	ul {
+		list-style: none;
+	}
 	.accordion {
 		background-color: #111827;
 		color: #9ca3af;
 		cursor: pointer;
 		padding: 18px 18px 18px 18px;
-		width: 100%;
 		text-align: left;
 		transition: 0.4s;
 		font-weight: 400;
@@ -67,6 +72,7 @@
 		border-left: #9ca3af solid 2px;
 		border-right: #9ca3af solid 2px;
 		border-bottom: #9ca3af solid 2px;
+		border-top: 0;
 	}
 
 	.accordion i {
@@ -89,7 +95,7 @@
 		overflow: hidden;
 		font-weight: 100;
 		color: #fff;
-		border-top: 0px;
+		border-top: 0;
 		border-bottom: 2px;
 		border-left: 2px;
 		border-right: 2px;
