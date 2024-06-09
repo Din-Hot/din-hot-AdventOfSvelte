@@ -1,0 +1,136 @@
+<script lang="ts">
+	import { slide } from 'svelte/transition'
+
+	let challenges = [
+		{
+			id: 1,
+			title: 'Naughty or Nice',
+			content:
+				'Challenge was to build a system for the elves, enabling them to input names and tally each childs deeds to keep track of whether they’re good or bad.'
+		},
+		{ id: 2, title: 'Merry Munch-o-Meter', content: 'Second challenge' },
+		{ id: 3, title: 'Jingle Bell Balancer', content: 'Third challenge' }
+	]
+
+	let currentOpen = 0
+
+	function openAccordion(panelNumber: number) {
+		if (currentOpen === panelNumber) {
+			currentOpen = 0
+		} else {
+			currentOpen = panelNumber
+		}
+	}
+</script>
+
+{#each challenges as challenge (challenge.id)}
+	<button
+		class="accordion {currentOpen === challenge.id ? 'active' : ''} {currentOpen ===
+		challenge.id + 1
+			? 'next-active'
+			: ''}"
+		on:click={() => openAccordion(challenge.id)}
+		>Day {challenge.id} - {challenge.title}
+		{#if currentOpen === challenge.id}
+			<i class="fa-solid fa-angle-up"></i>
+		{:else}
+			<i class="fa-solid fa-angle-down"></i>
+		{/if}</button
+	>
+	{#if currentOpen === challenge.id}
+		<div
+			transition:slide={{ duration: 300 }}
+			class="panel {currentOpen === challenge.id ? 'active' : ''}"
+		>
+			<p>
+				{challenge.content}
+			</p>
+
+			<a class="solution-button" href="/solutions/{challenge.id}">
+				<i class="fa-solid fa-pen-ruler"></i>My solution</a
+			>
+		</div>
+	{/if}
+{/each}
+
+<style>
+	.accordion {
+		background-color: #111827;
+		color: #9ca3af;
+		cursor: pointer;
+		padding: 18px 18px 18px 18px;
+		width: 100%;
+		text-align: left;
+		transition: 0.4s;
+		font-weight: 400;
+		font-size: 1rem;
+		border-left: #9ca3af solid 2px;
+		border-right: #9ca3af solid 2px;
+		border-bottom: #9ca3af solid 2px;
+	}
+
+	.accordion i {
+		font-size: 1rem;
+		color: #9ca3af;
+		float: right;
+		margin-left: 5px;
+	}
+
+	.active,
+	.accordion:hover {
+		background-color: #1f2937;
+	}
+
+	.panel {
+		padding: 2rem;
+		background-color: #111827;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		font-weight: 100;
+		color: #fff;
+		border-top: 0px;
+		border-bottom: 2px;
+		border-left: 2px;
+		border-right: 2px;
+		border-color: #9ca3af;
+		border-style: solid;
+	}
+
+	.accordion:first-of-type {
+		border-radius: 20px 20px 0 0;
+		border-top: solid 2px;
+	}
+	.accordion.active {
+		border: #ff3e00 solid 2px;
+		border-top: 0;
+	}
+	.next-active {
+		border-bottom: #ff3e00 solid 2px;
+	}
+	.accordion.active:first-of-type {
+		border: #ff3e00 solid 2px;
+	}
+
+	.solution-button {
+		font-size: 1.5rem;
+		width: 10rem;
+
+		margin: 2rem auto 0;
+		background-color: #ff3e00;
+		border-radius: 1rem;
+		text-decoration: none;
+		color: #fff;
+		font-weight: 400;
+		text-align: center;
+		padding: 1rem;
+	}
+
+	.solution-button:hover {
+		color: rgba(255, 255, 255, 75%);
+		background-color: rgba(255, 64, 0, 75%);
+	}
+	.solution-button i {
+		margin-right: 0.5rem;
+	}
+</style>

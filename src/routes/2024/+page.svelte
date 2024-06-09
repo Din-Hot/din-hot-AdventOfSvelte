@@ -1,9 +1,12 @@
 <script lang="ts">
+	import Snowflakes from '$lib/components/Snowflakes.svelte'
 </script>
 
-<div class="container">
-	<h1>2024 page</h1>
-</div>
+<Snowflakes>
+	<div class="container">
+		<h1>2024 page</h1>
+	</div>
+</Snowflakes>
 
 <style>
 	.container {
@@ -17,5 +20,6 @@
 	h1 {
 		font-size: 3rem;
 		margin: auto;
+		color: #fff;
 	}
 </style>

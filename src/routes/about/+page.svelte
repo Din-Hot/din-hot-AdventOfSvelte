@@ -1,21 +1,31 @@
 <script lang="ts">
+	import Snowflakes from '$lib/components/Snowflakes.svelte'
 </script>
 
-<div class="container">
-	<h1>About page</h1>
-</div>
+<Snowflakes>
+	<div class="container">
+		<h1>About page</h1>
+		<p>Description of the challenge will go here...</p>
+	</div>
+</Snowflakes>
 
 <style>
 	.container {
 		display: flex;
-		align-items: center;
-		align-items: center;
 		height: 100vh;
 		width: 100vw;
+		flex-direction: column;
 	}
 
 	h1 {
 		font-size: 3rem;
-		margin: auto;
+		color: #fff;
+		margin: 5rem auto;
+	}
+	p {
+		font-size: 1rem;
+		color: #fff;
+		margin: 6rem auto;
+		font-weight: 200;
 	}
 </style>

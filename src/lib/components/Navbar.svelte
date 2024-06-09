@@ -4,8 +4,6 @@
 	let dropDownOpened = false
 	let menuActive = false
 
-	$: console.log(dropDownOpened)
-
 	function closeMenu() {
 		menuActive = false
 	}
