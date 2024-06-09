@@ -1,12 +1,12 @@
 <script lang="ts">
-	import Snowflakes from '$lib/components/Snowflakes.svelte'
+	import SnowflakeBg from '$lib/components/SnowflakeBG.svelte'
 </script>
 
-<Snowflakes>
+<SnowflakeBg>
 	<div class="container">
 		<h1>Contact page</h1>
 	</div>
-</Snowflakes>
+</SnowflakeBg>
 
 <style>
 	.container {

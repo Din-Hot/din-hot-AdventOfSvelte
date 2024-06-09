@@ -1,13 +1,13 @@
 <script>
-	import Snowflakes from '$lib/components/Snowflakes.svelte'
+	import SnowflakeBg from '$lib/components/SnowflakeBG.svelte'
 </script>
 
-<Snowflakes>
+<SnowflakeBg>
 	<div class="title">
 		<h1>Advent of Svelte challenge by Din Hot</h1>
 		<p>My solutions to <a href="https://advent.sveltesociety.dev/">advent.sveltesociety.dev</a></p>
 	</div>
-</Snowflakes>
+</SnowflakeBg>
 
 <style>
 	.title {

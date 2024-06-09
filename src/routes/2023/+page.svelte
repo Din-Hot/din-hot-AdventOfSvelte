@@ -1,16 +1,16 @@
 <script lang="ts">
 	import Accordion from '$lib/components/Accordion.svelte'
-	import Snowflakes from '$lib/components/Snowflakes.svelte'
+	import SnowflakeBg from '$lib/components/SnowflakeBG.svelte'
 </script>
 
-<Snowflakes>
+<SnowflakeBg>
 	<div class="container">
 		<h1>2023 Challenges</h1>
 		<div class="accordion">
 			<Accordion />
 		</div>
 	</div>
-</Snowflakes>
+</SnowflakeBg>
 
 <style>
 	.container {
