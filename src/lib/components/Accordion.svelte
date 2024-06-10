@@ -25,6 +25,8 @@
 
 <ul>
 	{#each challenges as challenge (challenge.id)}
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 		<li
 			class="accordion {currentOpen === challenge.id ? 'active' : ''} {currentOpen ===
 			challenge.id + 1
@@ -48,7 +50,7 @@
 					{challenge.content}
 				</p>
 
-				<a class="solution-button" href="/solutions/{challenge.id}">
+				<a class="solution-button" href="/solutions/2023/{challenge.id}">
 					<i class="fa-solid fa-pen-ruler"></i>My solution</a
 				>
 			</div>

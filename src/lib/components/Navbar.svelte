@@ -15,7 +15,7 @@
 			<a href="/" on:click={closeMenu}>Din-Hot Advent of Svelte challenge</a>
 		</h1>
 		<ul class="navigation">
-			<li><a href="about">About</a></li>
+			<li><a href="/about">About</a></li>
 			<li
 				on:mouseenter={() => (dropDownOpened = true)}
 				on:mouseleave={() => (dropDownOpened = false)}
