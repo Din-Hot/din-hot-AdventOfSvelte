@@ -38,7 +38,6 @@
 		<div class="list-header">
 			<li class="name">Name</li>
 			<li class="tally">Tally</li>
-			<li class="meter">Result</li>
 		</div>
 		<ul class="names-list">
 			{#if namesList}
@@ -49,19 +48,14 @@
 				</div>
 				<div class="tally-count">
 					{#each namesList as item}
-						<li>{item.tally}</li>
-					{/each}
-				</div>
-				<div class="naughty_meter">
-					{#each namesList as item}
 						{#if item.tally <= 0 && item.name.toUpperCase() !== 'AMELA'}
-							<li class="naughty">Naughty</li>
+							<li class="naughty">{item.tally}</li>
 						{:else if item.tally > 0 && item.name.toUpperCase() !== 'AMELA'}
-							<li class="nice">Nice</li>
+							<li class="nice">{item.tally}</li>
 						{:else if item.tally <= 0 && item.name.toUpperCase() === 'AMELA'}
-							<li class="naughty">Naughty</li>
+							<li class="naughty">{item.tally}</li>
 						{:else}
-							<li>x</li>
+							<li>{item.tally}</li>
 						{/if}
 					{/each}
 				</div>
@@ -119,12 +113,12 @@
 	.list-header {
 		display: grid;
 		grid-template-rows: 2rem;
-		grid-template-columns: 15rem 15rem 15rem;
+		grid-template-columns: 22rem 22rem;
 		font-size: 2rem;
 		text-align: center;
 		border-bottom: black 2px solid;
 		padding-bottom: 1rem;
-		width: 45rem;
+		width: 44rem;
 	}
 
 	.name {
@@ -135,14 +129,10 @@
 		grid-row: 1 / 1;
 		grid-column: 2 / 2;
 	}
-	.meter {
-		grid-row: 1 / 1;
-		grid-column: 3 / 3;
-	}
 	.names-list {
 		display: grid;
 		grid-template-rows: 3rem;
-		grid-template-columns: 15rem 15rem 15rem;
+		grid-template-columns: 22rem 22rem;
 		overflow: scroll;
 		height: 30rem;
 		text-align: center;
@@ -160,10 +150,6 @@
 		grid-row: 1 / 1;
 		grid-column: 2 / 2;
 	}
-	.naughty_meter {
-		grid-row: 1 / 1;
-		grid-column: 3 / 3;
-	}
 	.naughty {
 		color: red;
 	}
@@ -178,7 +164,7 @@
 			padding: 2rem;
 			margin-top: 3rem;
 			border-radius: 20px;
-			width: 15rem;
+			width: 20rem;
 		}
 		.controls label {
 			display: none;
@@ -202,19 +188,19 @@
 			padding: 2rem;
 			margin: 3rem;
 			border-radius: 20px;
-			width: 21rem;
+			width: 20rem;
 		}
 
 		.list-header {
 			grid-template-rows: 2rem;
-			grid-template-columns: 7rem 7rem 7rem;
+			grid-template-columns: 10rem 10rem;
 			font-size: 1.2rem;
 			padding-bottom: 1rem;
 			width: 21rem;
 		}
 		.names-list {
 			grid-template-rows: 3rem;
-			grid-template-columns: 7rem 7rem 7rem;
+			grid-template-columns: 10rem 10rem;
 			padding-top: 1rem;
 		}
 		.names-list li {
@@ -229,7 +215,7 @@
 			padding: 2rem;
 			margin-top: 3rem;
 			border-radius: 20px;
-			width: 13rem;
+			width: 16rem;
 		}
 		.controls label {
 			display: none;
@@ -253,19 +239,19 @@
 			padding: 2rem;
 			margin: 3rem;
 			border-radius: 20px;
-			width: 15rem;
+			width: 16rem;
 		}
 
 		.list-header {
 			grid-template-rows: 2rem;
-			grid-template-columns: 5rem 5rem 5rem;
+			grid-template-columns: 8rem 8rem;
 			font-size: 1.2rem;
 			padding-bottom: 1rem;
 			width: 15rem;
 		}
 		.names-list {
 			grid-template-rows: 3rem;
-			grid-template-columns: 5rem 5rem 5rem;
+			grid-template-columns: 8rem 8rem;
 			padding-top: 1rem;
 		}
 		.names-list li {
