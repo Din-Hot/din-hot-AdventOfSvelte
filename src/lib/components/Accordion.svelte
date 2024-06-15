@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition'
+	import { page } from '$app/stores'
+	import { goto } from '$app/navigation'
 
 	let challenges = [
 		{
@@ -9,16 +11,25 @@
 				'Challenge was to build a system for the elves, enabling them to input names and tally each childs deeds to keep track of whether they’re good or bad.'
 		},
 		{ id: 2, title: 'Merry Munch-o-Meter', content: 'Second challenge' },
-		{ id: 3, title: 'Jingle Bell Balancer', content: 'Third challenge' }
+		{ id: 3, title: 'Jingle Bell Balancer', content: 'Third challenge' },
+		{ id: 4, title: 'Heart of Christmas', content: 'tbd' },
+		{ id: 5, title: 'Present Progress', content: 'tbd' },
+		{ id: 6, title: 'Misteltoe Metronome', content: 'tbd' },
+		{ id: 7, title: 'Morse Mischief', content: 'tbd' }
 	]
 
-	let currentOpen = 0
+	let url_id = Number($page.url.hash.slice(5))
+
+	console.log(url_id)
+
+	let currentOpen = url_id
 
 	function openAccordion(panelNumber: number) {
 		if (currentOpen === panelNumber) {
 			currentOpen = 0
 		} else {
 			currentOpen = panelNumber
+			// goto(`${$page.url.pathname}#day-${panelNumber}`)
 		}
 	}
 </script>
@@ -28,17 +39,21 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 		<li
+			on:click={() => openAccordion(challenge.id)}
 			class="accordion {currentOpen === challenge.id ? 'active' : ''} {currentOpen ===
 			challenge.id + 1
 				? 'next-active'
 				: ''}"
-			on:click={() => openAccordion(challenge.id)}
 		>
 			Day {challenge.id} - {challenge.title}
 			{#if currentOpen === challenge.id}
-				<i class="fa-solid fa-angle-up"></i>
+				<a href="#day-{challenge.id}" aria-roledescription="opens day {challenge.id}"
+					><i class="fa-solid fa-angle-up"></i></a
+				>
 			{:else}
-				<i class="fa-solid fa-angle-down"></i>
+				<a href="#day-{challenge.id}" aria-roledescription="closes day {challenge.id}"
+					><i class="fa-solid fa-angle-down"></i></a
+				>
 			{/if}
 		</li>
 		{#if currentOpen === challenge.id}
@@ -46,9 +61,9 @@
 				transition:slide={{ duration: 300 }}
 				class="panel {currentOpen === challenge.id ? 'active' : ''}"
 			>
-				<p>
+				<span>
 					{challenge.content}
-				</p>
+				</span>
 
 				<a class="solution-button" href="/solutions/2023/{challenge.id}">
 					<i class="fa-solid fa-pen-ruler"></i>My solution</a
@@ -83,6 +98,11 @@
 		float: right;
 		margin-left: 5px;
 	}
+	.accordion a {
+		font-size: 1rem;
+		color: #9ca3af;
+		text-decoration: none;
+	}
 
 	.active,
 	.accordion:hover {
@@ -103,6 +123,9 @@
 		border-right: 2px;
 		border-color: #9ca3af;
 		border-style: solid;
+	}
+	.panel span {
+		line-height: 1.75rem;
 	}
 
 	.accordion:first-of-type {

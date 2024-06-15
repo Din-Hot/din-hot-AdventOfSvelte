@@ -16,7 +16,6 @@
 	.container {
 		display: flex;
 		align-items: center;
-		height: 100vh;
 		width: 100vw;
 		flex-direction: column;
 	}
@@ -34,6 +33,9 @@
 		width: 40rem;
 		overflow: hidden;
 		margin: 5rem;
+		height: fit-content;
+
+		overflow: visible;
 	}
 	@media (max-width: 768px) {
 		.accordion {

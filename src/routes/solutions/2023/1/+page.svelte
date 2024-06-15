@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { fade, slide, fly } from 'svelte/transition'
 	import type { PageData } from './$types'
-
 	export let data: PageData
 
 	let namesList = data.list
@@ -31,7 +31,7 @@
 		<label for="tally">Tally:</label>
 		<input type="number" id="tally" placeholder="tally" bind:value={tally} />
 
-		<button>Add New</button>
+		<button tabindex="0">Add new</button>
 	</form>
 
 	<div class="names-list-container">
@@ -43,19 +43,19 @@
 			{#if namesList}
 				<div class="child-name">
 					{#each namesList as item}
-						<li>{item.name}</li>
+						<li in:fade={{ duration: 3 }}>{item.name}</li>
 					{/each}
 				</div>
 				<div class="tally-count">
 					{#each namesList as item}
 						{#if item.tally <= 0 && item.name.toUpperCase() !== 'AMELA'}
-							<li class="naughty">{item.tally}</li>
+							<li class="naughty" in:fade={{ duration: 3 }}>{item.tally}</li>
 						{:else if item.tally > 0 && item.name.toUpperCase() !== 'AMELA'}
-							<li class="nice">{item.tally}</li>
+							<li class="nice" in:fade={{ duration: 3 }}>{item.tally}</li>
 						{:else if item.tally <= 0 && item.name.toUpperCase() === 'AMELA'}
-							<li class="naughty">{item.tally}</li>
+							<li class="naughty" in:fade={{ duration: 3 }}>{item.tally}</li>
 						{:else}
-							<li>{item.tally}</li>
+							<li in:fade={{ duration: 3 }}>{item.tally}</li>
 						{/if}
 					{/each}
 				</div>
@@ -98,6 +98,10 @@
 
 	.controls button:active {
 		background: rgba(0, 0, 255, 0.75);
+	}
+
+	.controls button:focus {
+		outline: auto;
 	}
 
 	.names-list-container {

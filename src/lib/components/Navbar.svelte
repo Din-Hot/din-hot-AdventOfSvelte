@@ -20,7 +20,10 @@
 				on:mouseenter={() => (dropDownOpened = true)}
 				on:mouseleave={() => (dropDownOpened = false)}
 			>
-				Year <span class="down-arrow">▼</span>
+				<a href="#top" on:click={() => (dropDownOpened = !dropDownOpened)}
+					>Year <span class="down-arrow">▼</span></a
+				>
+
 				{#if dropDownOpened}
 					<div transition:slide={{ duration: 300 }} class="dropdown-menu">
 						<ul transition:scale={{ duration: 370 }}>
@@ -33,9 +36,8 @@
 			<li><a href="/contact">Contact me</a></li>
 		</ul>
 		<ul class="phone-navigation">
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<div
+			<a
+				href="#top"
 				on:click={() => {
 					menuActive = !menuActive
 				}}
@@ -43,7 +45,7 @@
 				<li class="bars">
 					<i class="fa-solid fa-bars"></i>
 				</li>
-			</div>
+			</a>
 		</ul>
 	</div>
 
@@ -58,7 +60,7 @@
 					class:frame={dropDownOpened}
 					class={`${dropDownOpened ? 'hover-enabled' : ''}`}
 				>
-					Year <span class="down-arrow">{dropDownOpened ? '▲' : '▼'}</span>
+					<a href="#top">Year <span class="down-arrow">{dropDownOpened ? '▲' : '▼'}</span></a>
 					{#if dropDownOpened}
 						<li><a href="/2023" on:click={closeMenu}>2023</a></li>
 						<li><a href="/2024" on:click={closeMenu}>2024 <br />(Not yet out)</a></li>
