@@ -1,16 +1,23 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition'
 	import { page } from '$app/stores'
-	import { goto } from '$app/navigation'
+	import { copy } from 'svelte-copy'
+	import type { Page } from '@sveltejs/kit'
+	import { dev } from '$app/environment'
 
 	let challenges = [
 		{
 			id: 1,
 			title: 'Naughty or Nice',
 			content:
-				'Challenge was to build a system for the elves, enabling them to input names and tally each childs deeds to keep track of whether they’re good or bad.'
+				"Challenge was to build a system for the elves, enabling them to input names and tally each childs deeds to keep track of whether they're good or bad."
 		},
-		{ id: 2, title: 'Merry Munch-o-Meter', content: 'Second challenge' },
+		{
+			id: 2,
+			title: 'Merry Munch-o-Meter',
+			content:
+				'The task was creating a Cookie Counter for Santa, which can show the tally of cookies munched. There is an option to add, remove, and reset the count.<br><br>Also Santas mood changes based on the number of cookies eaten - he gets a little merrier with each cookie!'
+		},
 		{ id: 3, title: 'Jingle Bell Balancer', content: 'Third challenge' },
 		{ id: 4, title: 'Heart of Christmas', content: 'tbd' },
 		{ id: 5, title: 'Present Progress', content: 'tbd' },
@@ -20,8 +27,6 @@
 
 	let url_id = Number($page.url.hash.slice(5))
 
-	console.log(url_id)
-
 	let currentOpen = url_id
 
 	function openAccordion(panelNumber: number) {
@@ -29,7 +34,6 @@
 			currentOpen = 0
 		} else {
 			currentOpen = panelNumber
-			// goto(`${$page.url.pathname}#day-${panelNumber}`)
 		}
 	}
 </script>
@@ -47,27 +51,34 @@
 		>
 			Day {challenge.id} - {challenge.title}
 			{#if currentOpen === challenge.id}
-				<a href="#day-{challenge.id}" aria-roledescription="opens day {challenge.id}"
-					><i class="fa-solid fa-angle-up"></i></a
-				>
+				<i class="fa-solid fa-angle-up"></i>
 			{:else}
-				<a href="#day-{challenge.id}" aria-roledescription="closes day {challenge.id}"
-					><i class="fa-solid fa-angle-down"></i></a
-				>
+				<i class="fa-solid fa-angle-down"></i>
 			{/if}
 		</li>
+		<li />
 		{#if currentOpen === challenge.id}
 			<div
 				transition:slide={{ duration: 300 }}
 				class="panel {currentOpen === challenge.id ? 'active' : ''}"
 			>
 				<span>
-					{challenge.content}
+					{@html challenge.content}
 				</span>
-
 				<a class="solution-button" href="/solutions/2023/{challenge.id}">
 					<i class="fa-solid fa-pen-ruler"></i>My solution</a
 				>
+				<a
+					class="solution-copy-link"
+					href="#day-{challenge.id}"
+					use:copy={dev
+						? `${$page.url.hostname}:${$page.url.port}${$page.url.pathname}#day-${challenge.id}`
+						: `${$page.url.hostname}${$page.url.pathname}#day-${challenge.id}`}
+				>
+					<i class="fa-solid fa-link tooltip">
+						<span class="tooltiptext">Copy link to solution</span>
+					</i>
+				</a>
 			</div>
 		{/if}
 	{/each}
@@ -97,11 +108,6 @@
 		color: #9ca3af;
 		float: right;
 		margin-left: 5px;
-	}
-	.accordion a {
-		font-size: 1rem;
-		color: #9ca3af;
-		text-decoration: none;
 	}
 
 	.active,
@@ -156,6 +162,21 @@
 		text-align: center;
 		padding: 1rem;
 	}
+	.solution-copy-link {
+		font-size: 1.5rem;
+		width: 10rem;
+		margin: 2rem auto 0;
+		border-radius: 1rem;
+		text-decoration: none;
+		color: #fff;
+		font-weight: 400;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	.solution-copy-link:hover {
+		color: rgba(255, 255, 255, 75%);
+	}
 
 	.solution-button:hover {
 		color: rgba(255, 255, 255, 75%);
@@ -163,5 +184,47 @@
 	}
 	.solution-button i {
 		margin-right: 0.5rem;
+	}
+
+	/* Tooltip container */
+	.tooltip {
+		position: relative;
+		display: inline-block;
+		border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+	}
+
+	/* Tooltip text */
+	.tooltip .tooltiptext {
+		visibility: hidden;
+		width: 120px;
+		color: #fff;
+		text-align: center;
+		padding: 5px 0;
+		border-radius: 6px;
+		background-color: black;
+		/* Position the tooltip text - see examples below! */
+		position: absolute;
+		z-index: 1;
+		width: 120px;
+		bottom: 125%;
+		left: 50%;
+		margin-left: -60px;
+		line-height: normal;
+		font-size: 0.75rem;
+	}
+
+	/* Show the tooltip text when you mouse over the tooltip container */
+	.tooltip:hover .tooltiptext {
+		visibility: visible;
+	}
+	.tooltip .tooltiptext::after {
+		content: ' ';
+		position: absolute;
+		top: 100%; /* At the bottom of the tooltip */
+		left: 50%;
+		margin-left: -5px;
+		border-width: 5px;
+		border-style: solid;
+		border-color: black transparent transparent transparent;
 	}
 </style>

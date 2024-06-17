@@ -52,7 +52,7 @@
 	{#if menuActive}
 		<ul transition:slide={{ duration: 300 }} class="phone-menu">
 			<div transition:scale={{ duration: 370 }}>
-				<li><a href="about" on:click={closeMenu}>About</a></li>
+				<li><a href="/about" on:click={closeMenu}>About</a></li>
 				<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<li

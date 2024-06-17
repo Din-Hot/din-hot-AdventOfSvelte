@@ -44,6 +44,9 @@ devDependencies:
   svelte-check:
     specifier: ^3.6.0
     version: 3.7.1(postcss@8.4.38)(svelte@4.2.17)
+  svelte-copy:
+    specifier: ^1.4.2
+    version: 1.4.2(svelte@4.2.17)
   tslib:
     specifier: ^2.4.1
     version: 2.6.2
@@ -1850,6 +1853,14 @@ packages:
       - sass
       - stylus
       - sugarss
+    dev: true
+
+  /svelte-copy@1.4.2(svelte@4.2.17):
+    resolution: {integrity: sha512-Q99JvWDzB58JlbVWX2VxjHX/CQ5ayDLUGGJgL2EqU1+3c9CDOtxLrKFZx5CVN5bN/DDl62nxtazz0j3nGX1Xew==}
+    peerDependencies:
+      svelte: ^3.55.0 || ^4.0.0
+    dependencies:
+      svelte: 4.2.17
     dev: true
 
   /svelte-eslint-parser@0.36.0(svelte@4.2.17):

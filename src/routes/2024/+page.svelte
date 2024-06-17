@@ -4,7 +4,7 @@
 
 <SnowflakeBg>
 	<div class="container">
-		<h1>2024 page</h1>
+		<h1>When the new challenges are out for 2024, I will add them here</h1>
 	</div>
 </SnowflakeBg>
 
