@@ -1,52 +1,84 @@
 <script lang="ts">
 	let cookiesEaten = 0
-	let level = 5
+	let level = 0
+	let message = '  '
+	let properties = [
+		'height: 10%;background-color: black;',
+		'height: 12%;background-color: black; border-radius: 50%;',
+		'border-top: 0.5rem solid black;border-radius: 5rem 5rem 0 0;',
+		'height: 30%;background-color: black;border-radius: 50%;'
+	]
+
+	$: if (cookiesEaten < 0) {
+		cookiesEaten = 0
+		message = "Can't remove what wasn't eaten, duh 🙄"
+		setTimeout(() => {
+			message = '  '
+		}, 3000)
+	}
+	$: if (cookiesEaten > 25) {
+		cookiesEaten = 25
+		message = "Santa can't eat no more ✋"
+		setTimeout(() => {
+			message = '  '
+		}, 3000)
+	}
 
 	function cookie(action: String) {
 		if (action === 'eat') {
 			cookiesEaten++
-			checkLevel()
 		} else if (action === 'remove') {
 			cookiesEaten--
-			checkLevel()
 		} else {
 			cookiesEaten = 0
-			checkLevel()
 		}
+		checkLevel()
 	}
 
 	function checkLevel() {
-		if (cookiesEaten <= 0) {
-			level = 5
-		} else if (cookiesEaten > 6) {
-			level = 4
-		} else if (cookiesEaten > 12) {
-			level = 3
-		} else if (cookiesEaten > 20) {
+		if (cookiesEaten === 0) {
+			level = 0
+		} else if (cookiesEaten < 6) {
+			level = 1
+		} else if (cookiesEaten >= 6 && cookiesEaten < 12) {
 			level = 2
+		} else if (cookiesEaten >= 12 && cookiesEaten < 20) {
+			level = 3
+		} else if (cookiesEaten >= 20) {
+			level = 4
 		}
+		console.log(level)
 	}
 </script>
 
 <main>
+	<div class="message">{message}</div>
+	<p class="cookies-count">{cookiesEaten} cookies eaten</p>
 	<div class="controls">
 		<button on:click={() => cookie('eat')}>Eat 1 cookie</button>
 		<button on:click={() => cookie('remove')}>Remove 1 cookie (don't ask where it goes)</button>
 		<button on:click={() => cookie('reset')}>Reset count</button>
-		<p>{cookiesEaten} cookies eaten</p>
 	</div>
 
 	<div class="santa-container">
 		<div class="santa">
 			<div class="beard"></div>
 			<div class="head">
-				<div class="eye1"></div>
-				<div class="eye2"></div>
+				<div class="eye1" style={properties[level]}>
+					{#if level === 4}
+						<i class="fa-solid fa-cookie" style={properties[4]}></i>
+					{/if}
+				</div>
+				<div class="eye2" style={properties[level]}>
+					{#if level === 4}
+						<i class=" fa-solid fa-cookie"></i>
+					{/if}
+				</div>
 				<div class="nose"></div>
 				<div class="mouth"></div>
 			</div>
-			<div class="mustache-left"></div>
-			<div class="mustache-right"></div>
+			<div class="mustache-left" style="transform: rotate(-{cookiesEaten + 10}deg);"></div>
+			<div class="mustache-right" style="transform: rotate({cookiesEaten + 10}deg);"></div>
 			<div class="hat-top"></div>
 			<div class="hat-bottom"></div>
 			<div class="hat-ball"></div>
@@ -56,7 +88,7 @@
 
 <style>
 	main {
-		height: 100vh;
+		height: fit-content;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -65,14 +97,34 @@
 		gap: 2rem;
 	}
 
+	.message {
+		margin-top: 1rem;
+		font-size: 1.5rem;
+	}
+
+	.cookies-count {
+		font-size: 2rem;
+	}
 	.controls {
 		display: flex;
-		flex-direction: column;
-		padding: 2rem;
+		flex-direction: row;
+		padding: 1rem;
+		gap: 0.5rem;
+		text-align: center;
+		align-items: center;
+	}
+
+	.controls button {
+		width: fit-content;
+		border: 0;
+		padding: 1rem;
+		background-color: blue;
+		color: white;
+		border-radius: 20px;
 	}
 
 	.santa-container {
-		margin-bottom: 20rem;
+		margin-bottom: 10rem;
 	}
 	.santa {
 		display: flex;
@@ -107,14 +159,12 @@
 		left: 41%;
 		transform-origin: top right;
 		z-index: 3;
-		transform: rotate(25deg);
 	}
 
 	.mustache-left {
 		left: 49%;
 		border-radius: 20% 100% 0 100%;
 		transform-origin: top left;
-		transform: rotate(-25deg);
 	}
 	.head {
 		background-color: bisque;
@@ -159,9 +209,8 @@
 		position: inherit;
 		height: 30%;
 		width: 16%;
-		border-top: 0.5rem solid black;
-		border-radius: 5rem 5rem 0 0;
 		top: 40%;
+		font-size: 2rem;
 	}
 	.eye1 {
 		left: 21%;
@@ -187,5 +236,33 @@
 		border-radius: 0 0 5rem 5rem;
 		top: 155%;
 		left: 30%;
+	}
+
+	@media (max-width: 768px) {
+		.santa {
+			height: 25rem;
+			width: 25rem;
+		}
+		.eye1,
+		.eye2 {
+			font-size: 170%;
+		}
+		.controls {
+			padding: 0;
+			flex-direction: column;
+		}
+		.message {
+			font-size: 1rem;
+		}
+	}
+	@media (max-width: 460px) {
+		.santa {
+			height: 20rem;
+			width: 20rem;
+		}
+		.eye1,
+		.eye2 {
+			font-size: 120%;
+		}
 	}
 </style>
