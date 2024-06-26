@@ -36,9 +36,9 @@
 	}
 
 	function checkLevel() {
-		if (cookiesEaten === 0) {
+		if (cookiesEaten === 0 || cookiesEaten < 0) {
 			level = 0
-		} else if (cookiesEaten < 6) {
+		} else if (cookiesEaten < 6 && cookiesEaten !== 0) {
 			level = 1
 		} else if (cookiesEaten >= 6 && cookiesEaten < 12) {
 			level = 2
@@ -52,12 +52,25 @@
 </script>
 
 <main>
-	<div class="message">{message}</div>
 	<p class="cookies-count">{cookiesEaten} cookies eaten</p>
+
 	<div class="controls">
-		<button on:click={() => cookie('eat')}>Eat 1 cookie</button>
-		<button on:click={() => cookie('remove')}>Remove 1 cookie (don't ask where it goes)</button>
-		<button on:click={() => cookie('reset')}>Reset count</button>
+		{#if cookiesEaten === 25}
+			<a href="#message"><button on:click={() => cookie('eat')}>Eat 1 cookie</button></a>
+		{:else}
+			<button on:click={() => cookie('eat')}>Eat 1 cookie</button>
+		{/if}
+
+		{#if cookiesEaten === 0}
+			<a href="#message"
+				><button on:click={() => cookie('remove')}>Remove 1 cookie (don't ask where it goes)</button
+				></a
+			>
+		{:else}
+			<button on:click={() => cookie('remove')}>Remove 1 cookie (don't ask where it goes)</button>
+		{/if}
+
+		<a href=""><button on:click={() => cookie('reset')}>Reset count</button></a>
 	</div>
 
 	<div class="santa-container">
@@ -84,31 +97,37 @@
 			<div class="hat-ball"></div>
 		</div>
 	</div>
+	<div class="message" id="message">{message}</div>
 </main>
 
 <style>
 	main {
-		height: fit-content;
+		height: 100vh;
 		display: flex;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
 		background-color: #0f885f;
 		flex-direction: column;
-		gap: 2rem;
+		gap: 1rem;
+	}
+
+	a {
+		text-decoration: none;
+		color: white;
 	}
 
 	.message {
-		margin-top: 1rem;
 		font-size: 1.5rem;
+		margin-bottom: 3rem;
 	}
 
 	.cookies-count {
+		margin-top: 1rem;
 		font-size: 2rem;
 	}
 	.controls {
 		display: flex;
 		flex-direction: row;
-		padding: 1rem;
 		gap: 0.5rem;
 		text-align: center;
 		align-items: center;
@@ -121,10 +140,12 @@
 		background-color: blue;
 		color: white;
 		border-radius: 20px;
+		cursor: pointer;
+		touch-action: manipulation;
 	}
 
 	.santa-container {
-		margin-bottom: 10rem;
+		margin: 0.5rem;
 	}
 	.santa {
 		display: flex;
@@ -257,8 +278,8 @@
 	}
 	@media (max-width: 460px) {
 		.santa {
-			height: 20rem;
-			width: 20rem;
+			height: 18rem;
+			width: 18rem;
 		}
 		.eye1,
 		.eye2 {

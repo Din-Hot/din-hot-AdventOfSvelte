@@ -10,19 +10,41 @@
 			id: 1,
 			title: 'Naughty or Nice',
 			content:
-				"Challenge was to build a system for the elves, enabling them to input names and tally each childs deeds to keep track of whether they're good or bad."
+				"With the hundreds of thousands of letters from children piling up alongside their records of good and bad deeds, the Elves are in dire need of a modern solution.<br><br>The task was was to build a system for the elves, enabling them to input names and tally each childs deeds to keep track of whether they're good or bad."
 		},
 		{
 			id: 2,
 			title: 'Merry Munch-o-Meter',
 			content:
-				'The task was creating a Cookie Counter for Santa, which can show the tally of cookies munched. There is an option to add, remove, and reset the count.<br><br>Also Santas mood changes based on the number of cookies eaten - he gets a little merrier with each cookie!'
+				'Amidst the holiday cheer, a small problem has arisen - how can we keep track of how many cookies Santa has munched!<br><br>The task was creating a Cookie Counter for Santa, which can show the tally of cookies munched. There is an option to add, remove, and reset the count.<br><br>Also Santas mood changes based on the number of cookies eaten - he gets a little merrier with each cookie!'
 		},
-		{ id: 3, title: 'Jingle Bell Balancer', content: 'Third challenge' },
+		{
+			id: 3,
+			title: 'Jingle Bell Balancer',
+			content:
+				"Santa's sleigh can carry a maximum load of only 100 kg per journey. <br><br>The task was create a tool where Santa can choose whose presents to include on his run. The tool should show the current sleigh load and if the maximum of 100kg has been exceeded."
+		},
 		{ id: 4, title: 'Heart of Christmas', content: 'tbd' },
 		{ id: 5, title: 'Present Progress', content: 'tbd' },
 		{ id: 6, title: 'Misteltoe Metronome', content: 'tbd' },
-		{ id: 7, title: 'Morse Mischief', content: 'tbd' }
+		{ id: 7, title: 'Morse Mischief', content: 'tbd' },
+		{ id: 8, title: "Santa's Mysterious Deck of Doubles", content: 'tbd' },
+		{ id: 9, title: "Santa's Final Countdown", content: 'tbd' },
+		{ id: 10, title: 'Pop-up! Spreading the holiday cheer', content: 'tbd' },
+		{ id: 11, title: 'Tinsel Transformers', content: 'tbd' },
+		{ id: 12, title: 'Greetings and salutations', content: 'tbd' },
+		{ id: 13, title: 'Jingle Bell Balancer 2.0', content: 'tbd' },
+		{ id: 14, title: 'Snowfall Symphony', content: 'tbd' },
+		{ id: 15, title: 'Sparkling Snowglobes', content: 'tbd' },
+		{ id: 16, title: 'Lessons from Amazon™️', content: 'tbd' },
+		{ id: 17, title: 'Festive Funds', content: 'tbd' },
+		{ id: 18, title: "Santa's Quiz", content: 'tbd' },
+		{ id: 19, title: 'Polar Lights', content: 'tbd' },
+		{ id: 20, title: 'Jingle Jokes', content: 'tbd' },
+		{ id: 21, title: 'Oh the weather outside is frightful', content: 'tbd' },
+		{ id: 22, title: 'Snowflake Silhouettes', content: 'tbd' },
+		{ id: 23, title: 'ElfNet Social', content: 'tbd' },
+		{ id: 24, title: "Santa's Magical Tracker", content: 'tbd' }
 	]
 
 	let url_id = Number($page.url.hash.slice(5))
@@ -76,7 +98,7 @@
 						: `${$page.url.hostname}${$page.url.pathname}#day-${challenge.id}`}
 				>
 					<i class="fa-solid fa-link tooltip">
-						<span class="tooltiptext">Copy link to solution</span>
+						<span class="tooltiptext">Copy link to Day {challenge.id} challenge</span>
 					</i>
 				</a>
 			</div>
@@ -191,6 +213,8 @@
 		position: relative;
 		display: inline-block;
 		border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 	}
 
 	/* Tooltip text */
